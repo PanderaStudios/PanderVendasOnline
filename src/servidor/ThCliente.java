@@ -23,7 +23,7 @@ String serverName;
             ControleCliente cCliente = new ControleCliente();
             while (true) {
                 String comando = c1.receberTexto();
-                if ("H".equals(comando)) {
+                if ("Hello".equals(comando)) {
                         System.out.println("Servidor ThCliente - HELLO!!!");
                         c1.enviarTexto("Servidor ThCliente - HELLO...");
                         c1.enviarTexto(serverName );

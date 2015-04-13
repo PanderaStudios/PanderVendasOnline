@@ -68,6 +68,7 @@ public class JDDadosPedidos extends javax.swing.JDialog {
         if (dados.sucesso) {
             cPedido.persistirItens(dados.getDados());
         }
+        
     }
 
     /**

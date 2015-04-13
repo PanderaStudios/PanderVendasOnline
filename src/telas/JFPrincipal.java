@@ -247,6 +247,7 @@ public class JFPrincipal extends javax.swing.JFrame {
         mnuAlterarPedidos = new javax.swing.JMenuItem();
         mnuExcluirPedidos = new javax.swing.JMenuItem();
         jSeparator4 = new javax.swing.JPopupMenu.Separator();
+        mnuIncluirItemPedido = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         mnuIncluirCliente = new javax.swing.JMenuItem();
         mnuAlterarCliente = new javax.swing.JMenuItem();
@@ -376,6 +377,14 @@ public class JFPrincipal extends javax.swing.JFrame {
         });
         jMenuPedidos.add(mnuExcluirPedidos);
         jMenuPedidos.add(jSeparator4);
+
+        mnuIncluirItemPedido.setText("Incluir Item Pedido");
+        mnuIncluirItemPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuIncluirItemPedidoActionPerformed(evt);
+            }
+        });
+        jMenuPedidos.add(mnuIncluirItemPedido);
 
         jMenuBar1.add(jMenuPedidos);
 
@@ -618,7 +627,7 @@ public class JFPrincipal extends javax.swing.JFrame {
                 if (cpf != null) {
                     if (!cpf.isEmpty()) {
                         // Modal -> Fica parado aqui até a janela "sumir"
-                        persistirPedido(null, codPed, cpf, getNomeCli(cpf), "0,00", (DefaultTableModel) getDadosTabelaItens());
+                        persistirPedido(null, codPed, cpf, obter(cpf).getCpf(), "0,00", (DefaultTableModel) getDadosTabelaItens());
                         atualizarTabela();
                     }
                 }
@@ -648,6 +657,27 @@ public class JFPrincipal extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_mnuExcluirPedidosActionPerformed
+
+    private void mnuIncluirItemPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuIncluirItemPedidoActionPerformed
+        // TODO add your handling code here:
+        String codPed = entraCodPed(false); // recebera codigo digitado
+        if (codPed != null) {
+            if (!codPed.isEmpty()) {
+// entra com codigo cliente existente
+                
+//                String cpf =  cCliente.obter(codPed).getCpf() ;//entraCpfCli(false); // recebera codigo digitado
+//                if (cpf != null) {
+//                    if (!cpf.isEmpty()) {
+                        // Modal -> Fica parado aqui até a janela "sumir"
+                        persistirItemPedido(obterItemPedido(codPed), codPed, obter(codPed).getCpf(), obter(codPed).getNome(),
+                                "0,00");
+                        atualizarTabela();
+//                    }
+//               }
+            }
+        }
+
+    }//GEN-LAST:event_mnuIncluirItemPedidoActionPerformed
 
     private void sairPgm() {
         // TODO add your handling code here:
@@ -824,7 +854,7 @@ public class JFPrincipal extends javax.swing.JFrame {
         return cod;
     }
 
-    private String getNomeCli(String cpf) {
+/*    private String getNomeCli(String cpf) {
 
         ArrayList<Cliente> cpfCod = (obterTodos());
 
@@ -835,7 +865,7 @@ public class JFPrincipal extends javax.swing.JFrame {
         }
         return "";
     }
-
+*/
     /**
      * @param args the command line arguments
      */
@@ -900,6 +930,7 @@ public class JFPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnuExcluirPedidos;
     private javax.swing.JMenuItem mnuExcluirProduto;
     private javax.swing.JMenuItem mnuIncluirCliente;
+    private javax.swing.JMenuItem mnuIncluirItemPedido;
     private javax.swing.JMenuItem mnuIncluirPedidos;
     private javax.swing.JMenuItem mnuIncluirProduto;
     private javax.swing.JMenuItem mnuRecuperar;

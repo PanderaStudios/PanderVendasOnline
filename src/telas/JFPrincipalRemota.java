@@ -57,7 +57,7 @@ public class JFPrincipalRemota extends JFPrincipal {
     @Override
     protected void helloServer() {
         try {
-            c1c[0].enviarTexto("H");
+            c1c[0].enviarTexto("Hello");
             System.out.println(c1c[0].receberTexto());
             System.out.println("Cliente - HELLO SERVER!!!");
             serverName = c1c[0].receberTexto();
