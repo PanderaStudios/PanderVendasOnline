@@ -15,7 +15,7 @@ import modelo.ItemPedido;
 import modelo.Pedido;
 import modelo.Produto;
 
-public class JFPrincipalRemota extends JFPrincipal {
+public class ControleVendas_CLIENTE extends JFPrincipal {
 
     private static String ipServidor;
     private final int NUMPORTAS = 3;
@@ -27,7 +27,7 @@ public class JFPrincipalRemota extends JFPrincipal {
     /**
      *
      */
-    public JFPrincipalRemota() {
+    public ControleVendas_CLIENTE() {
         super( new ControlePedido());
         preActions();
         serverName = "";
@@ -66,7 +66,7 @@ public class JFPrincipalRemota extends JFPrincipal {
 
         } catch (NullPointerException | IOException ex) {
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(JFPrincipalRemota.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControleVendas_CLIENTE.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -79,7 +79,7 @@ public class JFPrincipalRemota extends JFPrincipal {
             c1c[0].enviarTexto(cpf);
         } catch (IOException ex) {
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(JFPrincipalRemota.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControleVendas_CLIENTE.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -92,7 +92,7 @@ public class JFPrincipalRemota extends JFPrincipal {
             c1c[1].enviarTexto(cpf);
         } catch (IOException ex) {
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(JFPrincipalRemota.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControleVendas_CLIENTE.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -105,7 +105,7 @@ public class JFPrincipalRemota extends JFPrincipal {
             c1c[2].enviarTexto(cpf);
         } catch (IOException ex) {
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(JFPrincipalRemota.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControleVendas_CLIENTE.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -118,7 +118,7 @@ public class JFPrincipalRemota extends JFPrincipal {
             c1c[2].enviarTexto(cpf);
         } catch (IOException ex) {
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(JFPrincipalRemota.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControleVendas_CLIENTE.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -135,7 +135,7 @@ public class JFPrincipalRemota extends JFPrincipal {
                 System.out.println("Cliente - persistir clientes");
                 c1c[0].enviarObjeto(dadosC.getDados());
             } catch (NullPointerException | IOException | ClassNotFoundException ex) {
-                Logger.getLogger(JFPrincipalRemota.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ControleVendas_CLIENTE.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -154,7 +154,7 @@ public class JFPrincipalRemota extends JFPrincipal {
                 c1c[1].enviarObjeto(dadosP.getDados());
             } catch (IOException ex) {
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(JFPrincipalRemota.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ControleVendas_CLIENTE.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -173,7 +173,7 @@ public class JFPrincipalRemota extends JFPrincipal {
                 c1c[2].enviarObjeto(dadosPed.getDados());
             } catch (IOException ex) {
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(JFPrincipalRemota.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ControleVendas_CLIENTE.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -192,7 +192,7 @@ public class JFPrincipalRemota extends JFPrincipal {
                 c1c[2].enviarObjeto(dadosItemPed.getDados());
             } catch (IOException ex) {
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(JFPrincipalRemota.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ControleVendas_CLIENTE.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -304,7 +304,7 @@ public class JFPrincipalRemota extends JFPrincipal {
             c1c[2].enviarTexto("G");
              c1c[2].enviarTexto("iG");
        } catch (IOException ex) {
-            Logger.getLogger(JFPrincipalRemota.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControleVendas_CLIENTE.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -315,7 +315,7 @@ public class JFPrincipalRemota extends JFPrincipal {
             c1c[2].enviarTexto("C");
             c1c[2].enviarTexto("iC");
         } catch (IOException ex) {
-            Logger.getLogger(JFPrincipalRemota.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControleVendas_CLIENTE.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -350,7 +350,7 @@ public class JFPrincipalRemota extends JFPrincipal {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new JFPrincipalRemota().setVisible(true);
+            new ControleVendas_CLIENTE().setVisible(true);
         });
     }
 }

@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  *
  * @author Marcos
  */
-public class JFPrinicipalServidor extends javax.swing.JFrame {
+public class PanderControleVendas_SERVIDOR extends javax.swing.JFrame {
 
 //    private ArrayList<String> listaA;
     private int numClientes;
@@ -23,7 +23,7 @@ public class JFPrinicipalServidor extends javax.swing.JFrame {
     /**
      * Creates new form JFPrinicipalServidor
      */
-    public JFPrinicipalServidor() {
+    public PanderControleVendas_SERVIDOR() {
         clienteON = new DefaultListModel<>();
         clienteOFF = new DefaultListModel<>();
 
@@ -266,7 +266,7 @@ public class JFPrinicipalServidor extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new JFPrinicipalServidor().setVisible(true);
+            new PanderControleVendas_SERVIDOR().setVisible(true);
         });
     }
 
