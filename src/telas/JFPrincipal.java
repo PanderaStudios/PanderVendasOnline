@@ -233,6 +233,7 @@ public class JFPrincipal extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtServerName = new javax.swing.JTextField();
+        btmConectarServer = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jRadioConectar = new javax.swing.JRadioButtonMenuItem();
@@ -293,7 +294,15 @@ public class JFPrincipal extends javax.swing.JFrame {
         jLabel5.setText("Server -->");
 
         txtServerName.setEditable(false);
+        txtServerName.setText("OffLine");
         txtServerName.setEnabled(false);
+
+        btmConectarServer.setText("Conectar Servidor");
+        btmConectarServer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btmConectarServerActionPerformed(evt);
+            }
+        });
 
         jMenu2.setText("Conectar");
 
@@ -458,8 +467,10 @@ public class JFPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(37, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btmConectarServer)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel3)
                         .addGap(82, 82, 82)
                         .addComponent(jLabel5)
@@ -487,7 +498,8 @@ public class JFPrincipal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel5)
-                    .addComponent(txtServerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtServerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btmConectarServer))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -571,6 +583,7 @@ public class JFPrincipal extends javax.swing.JFrame {
 
     private void mnuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuSairActionPerformed
         // TODO add your handling code here:
+
         sairPgm();
     }//GEN-LAST:event_mnuSairActionPerformed
 
@@ -610,7 +623,18 @@ public class JFPrincipal extends javax.swing.JFrame {
 
     private void btmSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmSairActionPerformed
         // TODO add your handling code here:
+
+        int sair;
+        sair = JOptionPane.showConfirmDialog(null,
+                "Confirma Sair do Programa?", "Cliente",
+                JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+        if (sair == 0) {
+            jTableCliente.removeAll();
+            jTableProduto.removeAll();
         sairPgm();
+            System.exit(0);
+        }
+
     }//GEN-LAST:event_btmSairActionPerformed
 
     private void jRadioDesconectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioDesconectarActionPerformed
@@ -679,9 +703,12 @@ public class JFPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_mnuIncluirItemPedidoActionPerformed
 
-    private void sairPgm() {
+    private void btmConectarServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmConectarServerActionPerformed
         // TODO add your handling code here:
-        int sair;
+    }//GEN-LAST:event_btmConectarServerActionPerformed
+
+    protected void sairPgm() {
+         int sair;
         sair = JOptionPane.showConfirmDialog(null,
                 "Confirma Sair do Programa?", "Cliente",
                 JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
@@ -691,6 +718,7 @@ public class JFPrincipal extends javax.swing.JFrame {
             System.exit(0);
         }
     }
+
 
     private String entraCpfCli(boolean isIncluir) {
         // TODO add your handling code here:
@@ -898,6 +926,7 @@ public class JFPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btmConectarServer;
     private javax.swing.JButton btmSair;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

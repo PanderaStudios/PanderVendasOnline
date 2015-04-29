@@ -62,7 +62,6 @@ public class ThServidor extends Thread {
 
     public void pararServ() {
         //      this.thcliente.interrupt();
-        clienteOFF.insertElementAt(numCliente + " - IP: " + sA[0].getInetAddress(), 0);
         for (int i = 0; i < ControleCliente.getNUMPORTAS(); i++) {
             try {
                 s0[i].close();
@@ -124,21 +123,32 @@ public class ThServidor extends Thread {
 
         while (true) {
 
+            String ipClienteOld = null;
+
             try {
                 for (int i = 0; i < ControleCliente.getNUMPORTAS(); i++) {
                     sA[i] = s0[i].accept();
                 }
 
-                new ThCliente(sA[0], serverName).start();
+            ipClienteOld = ipCliente;
+
+            new ThCliente(sA[0], serverName, ipCliente).start();
                 new ThProduto(sA[1]).start();
                 new ThPedido(sA[2]).start();
 
-                for (int i = 0; i < ControleCliente.getNUMPORTAS(); i++) {
+
+            for (int i = 0; i < ControleCliente.getNUMPORTAS(); i++) {
                     System.out.println("Cliente Conectado Porta <" + ControleCliente.getPorta(i) + "> " + sA[i].isConnected());
                 }
 
             } catch (IOException ex) {
                 Logger.getLogger(ThServidor.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+
+            if (!ipClienteOld.equals(ipCliente)) {
+                clienteOFF.insertElementAt(numCliente + " - IP: " + sA[0].getInetAddress(), 0);
+
             }
 
             numCliente++;

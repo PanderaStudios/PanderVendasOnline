@@ -25,6 +25,7 @@ public class JFPrincipalRemoto extends JFPrincipal {
     ControleComunicacao c1c[] = new ControleComunicacao[NUMPORTAS];
 
     int portas[] = new int[NUMPORTAS];
+    Socket s[] = new Socket[NUMPORTAS];
 
     /**
      *
@@ -32,6 +33,7 @@ public class JFPrincipalRemoto extends JFPrincipal {
     public JFPrincipalRemoto() {
         super(new ControlePedido());
 
+        // Prepara array com as Portas
         for (int i = 0; i < NUMPORTAS; i++) {
             portas[i] = 5050 + i;
         }
@@ -43,19 +45,19 @@ public class JFPrincipalRemoto extends JFPrincipal {
     private void carregaTabelas() {
         ArrayList<Cliente> lista = new ArrayList<>();
         lista.addAll(obterTodos());
-        System.out.println("CLIENTE - Vetor Clientes vazio -> " + lista.isEmpty());
+        System.out.println("CLIENTE - Vetor Clientes vazio? -> " + lista.isEmpty());
 
         ArrayList<Produto> lista1 = new ArrayList<>();
         lista1.addAll(obterTodosProdutos());
-        System.out.println("CLIENTE - Vetor Produtos vazio -> " + lista1.isEmpty());
+        System.out.println("CLIENTE - Vetor Produtos vazio? -> " + lista1.isEmpty());
 
         ArrayList<Pedido> lista2 = new ArrayList<>();
         lista2.addAll(obterTodosPedidos());
-        System.out.println("CLIENTE - Vetor Pedidos vazio -> " + lista2.isEmpty());
+        System.out.println("CLIENTE - Vetor Pedidos vazio? -> " + lista2.isEmpty());
 
         ArrayList<ItemPedido> lista3 = new ArrayList<>();
         lista3.addAll(obterTodosItens());
-        System.out.println("CLIENTE - Vetor Itens vazio -> " + lista3.isEmpty());
+        System.out.println("CLIENTE - Vetor Itens vazio? -> " + lista3.isEmpty());
     }
 
     @Override
@@ -324,10 +326,20 @@ public class JFPrincipalRemoto extends JFPrincipal {
     }
 
     @Override
+    protected void sairPgm() {
+        try {
+            c1c[0].enviarTexto("Bye");
+            System.out.println(c1c[0].receberTexto());
+            System.out.println("Cliente - Bye Bye fecha cliente...");
+            c1c[0].enviarTexto("" + s[0].getInetAddress());
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(JFPrincipalRemoto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
     protected void preActions() {
         try {
-            Socket s[] = new Socket[NUMPORTAS];
-
             System.out.println("Metodo local (Cliente) preActions");
 
             for (int i = 0; i < NUMPORTAS; i++) {
@@ -337,7 +349,7 @@ public class JFPrincipalRemoto extends JFPrincipal {
             for (int i = 0; i < NUMPORTAS; i++) {
                 c1c[i] = new ControleComunicacao(s[i]);
             }
-   //         carregaTabelas();
+            //         carregaTabelas();
         } catch (Exception ex) {
         }
     }

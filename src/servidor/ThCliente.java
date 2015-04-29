@@ -9,11 +9,13 @@ import modelo.Cliente;
 public class ThCliente extends Thread {
 
     private Socket s;
-String serverName;
+    private String serverName;
+    private String ipCliente;
 
-    public ThCliente(Socket s, String serverName) {
+    public ThCliente(Socket s, String serverName, String ipCliente) {
         this.s = s;
         this.serverName = serverName;
+        this.ipCliente = ipCliente;
     }
 
     @Override
@@ -24,17 +26,24 @@ String serverName;
             while (true) {
                 String comando = c1.receberTexto();
                 if ("Hello".equals(comando)) {
-                        System.out.println("Servidor ThCliente - HELLO!!!");
-                        c1.enviarTexto("Servidor ThCliente - HELLO...");
-                        c1.enviarTexto(serverName );
-                        System.out.println("Servidor ThCliente - ServerName --> " + serverName);
+                    System.out.println("Servidor ThCliente - HELLO!!!");
+                    c1.enviarTexto("Servidor ThCliente - HELLO Cliente...");
+                    c1.enviarTexto(serverName);
+                    System.out.println("Servidor ThCliente - ServerName --> " + serverName);
+                }
+
+                if ("Bye".equals(comando)) {
+                    System.out.println("Servidor ThCliente - Bye Bye!!!");
+                    c1.enviarTexto("Servidor ThCliente - Bye Bye Cliente...");
+                    ipCliente = c1.receberTexto();
+                    System.out.println("Servidor ThCliente - iPClienteOFF --> " + ipCliente);
                 }
 
                 if ("P".equals(comando)) {
-                        System.out.println("Servidor ThCliente - persistir");
-                        c1.enviarTexto("Servidor ThCliente - persistir");
-                        cCliente.persistir((Cliente) c1.receberObjeto());
-                        ControleCliente.armazenar();
+                    System.out.println("Servidor ThCliente - persistir");
+                    c1.enviarTexto("Servidor ThCliente - persistir");
+                    cCliente.persistir((Cliente) c1.receberObjeto());
+                    ControleCliente.armazenar();
                 }
 
                 if ("R".equals(comando)) {
@@ -52,9 +61,9 @@ String serverName;
                 }
 
                 if ("T".equals(comando)) {
-                        System.out.println("Servidor ThCliente - obter todos");
-                        c1.enviarTexto("Servidor ThCliente - obter todos");
-                        c1.enviarObjeto(cCliente.obterTodos());
+                    System.out.println("Servidor ThCliente - obter todos");
+                    c1.enviarTexto("Servidor ThCliente - obter todos");
+                    c1.enviarObjeto(cCliente.obterTodos());
                 }
 
                 if ("G".equals(comando)) {
