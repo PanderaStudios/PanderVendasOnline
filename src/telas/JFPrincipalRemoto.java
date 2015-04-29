@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import modelo.Cliente;
 import modelo.ItemPedido;
 import modelo.Pedido;
@@ -23,18 +22,23 @@ public class JFPrincipalRemoto extends JFPrincipal {
 //    protected ControlePedido cPedido
 //            = new ControlePedido();
 
+    ControleComunicacao c1c[] = new ControleComunicacao[NUMPORTAS];
+
+    int portas[] = new int[NUMPORTAS];
 
     /**
      *
      */
     public JFPrincipalRemoto() {
-        super( new ControlePedido());
+        super(new ControlePedido());
+
+        for (int i = 0; i < NUMPORTAS; i++) {
+            portas[i] = 5050 + i;
+        }
+
         preActions();
         serverName = "";
     }
-
-    ControleComunicacao c1c[] = new ControleComunicacao[NUMPORTAS];
-//    ControleComunicacao c2p;
 
     private void carregaTabelas() {
         ArrayList<Cliente> lista = new ArrayList<>();
@@ -302,8 +306,8 @@ public class JFPrincipalRemoto extends JFPrincipal {
             c1c[0].enviarTexto("G");
             c1c[1].enviarTexto("G");
             c1c[2].enviarTexto("G");
-             c1c[2].enviarTexto("iG");
-       } catch (IOException ex) {
+            c1c[2].enviarTexto("iG");
+        } catch (IOException ex) {
             Logger.getLogger(JFPrincipalRemoto.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -322,20 +326,18 @@ public class JFPrincipalRemoto extends JFPrincipal {
     @Override
     protected void preActions() {
         try {
+            Socket s[] = new Socket[NUMPORTAS];
+
             System.out.println("Metodo local (Cliente) preActions");
-            Socket s1c = new Socket(ipServidor, 5050);
-            System.out.println("Conectado Porta 5050> " + s1c.isConnected());
 
-            Socket s2p = new Socket(ipServidor, 5051);
-            System.out.println("Conectado Porta 5051> " + s2p.isConnected());
-
-            Socket s3pd = new Socket(ipServidor, 5052);
-            System.out.println("Conectado Porta 5052> " + s3pd.isConnected());
-
-            c1c[0] = new ControleComunicacao(s1c);
-            c1c[1] = new ControleComunicacao(s2p);
-            c1c[2] = new ControleComunicacao(s3pd);
-            carregaTabelas();
+            for (int i = 0; i < NUMPORTAS; i++) {
+                s[i] = new Socket(ipServidor, portas[i]);
+                System.out.println("Conectado Porta <" + portas[i] + "> = " + s[i].isConnected());
+            }
+            for (int i = 0; i < NUMPORTAS; i++) {
+                c1c[i] = new ControleComunicacao(s[i]);
+            }
+   //         carregaTabelas();
         } catch (Exception ex) {
         }
     }
