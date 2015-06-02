@@ -357,11 +357,14 @@ public class JFPrincipalRemoto extends JFPrincipal {
     public static void main(String args[]) {
 
         if (args.length == 0) {
-            ipServidor = "localhost";
+            ipServidor = "127.0.0.1";
         } else {
             ipServidor = Arrays.toString(args);
+            ipServidor = ipServidor.substring(1, ipServidor.length()-1);
         }
 
+        System.out.println("Ip Selecionado: " + ipServidor);
+       
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             new JFPrincipalRemoto().setVisible(true);
