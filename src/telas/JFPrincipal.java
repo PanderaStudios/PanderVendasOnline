@@ -83,7 +83,7 @@ public class JFPrincipal extends javax.swing.JFrame {
     protected TableModel getDadosTabelaPedido() {
         ArrayList<Pedido> lista = obterTodosPedidos();
         String[] titulos
-                = {"CodProd", "CodCli", "NomeCli", "ValorPed"};
+                = {"CodPed", "CodCli", "NomeCli", "ValorPed"};
         Object[][] valores2 = new Object[lista.size()][4];
         for (int i = 0; i < lista.size(); i++) {
             valores2[i][0] = lista.get(i).getCodPed();
@@ -112,7 +112,6 @@ public class JFPrincipal extends javax.swing.JFrame {
         jTableCliente.setModel(getDadosTabela());
         jTableProduto.setModel(getDadosTabelaProduto());
         jTablePedido.setModel(getDadosTabelaPedido());
-        helloServer();
     }
 
     protected void helloServer() {
@@ -144,7 +143,7 @@ public class JFPrincipal extends javax.swing.JFrame {
     }
 
     protected void persistirPedido(Pedido ped, String codPed, String codCli, String nomeCli, String valorPed, DefaultTableModel itensPed) {
-        JDDadosPedidos dados = new JDDadosPedidos(this, true,cPedido ,itensPed, cPedido.obter(codCli));
+        JDDadosPedidos dados = new JDDadosPedidos(this, true, cPedido, itensPed, cPedido.obter(codCli));
         dados.setDados(ped, codPed, codCli, nomeCli, valorPed, itensPed);
         dados.setVisible(true);
         // Modal -> Fica parado aqui até a janela "sumir"
@@ -202,6 +201,7 @@ public class JFPrincipal extends javax.swing.JFrame {
 
     /**
      * Creates new form JFPrincipal
+     *
      * @param cPedido
      */
     public JFPrincipal(ControlePedido cPedido) {
@@ -629,7 +629,7 @@ public class JFPrincipal extends javax.swing.JFrame {
         if (sair == 0) {
             jTableCliente.removeAll();
             jTableProduto.removeAll();
-        sairPgm();
+            sairPgm();
             System.exit(0);
         }
 
@@ -686,14 +686,14 @@ public class JFPrincipal extends javax.swing.JFrame {
         if (codPed != null) {
             if (!codPed.isEmpty()) {
 // entra com codigo cliente existente
-                
+
 //                String cpf =  cCliente.obter(codPed).getCpf() ;//entraCpfCli(false); // recebera codigo digitado
 //                if (cpf != null) {
 //                    if (!cpf.isEmpty()) {
-                        // Modal -> Fica parado aqui até a janela "sumir"
-                        persistirItemPedido(obterItemPedido(codPed), codPed, obter(codPed).getCpf(), obter(codPed).getNome(),
-                                "0,00");
-                        atualizarTabela();
+                // Modal -> Fica parado aqui até a janela "sumir"
+                persistirItemPedido(obterItemPedido(codPed), codPed, obter(codPed).getCpf(), obter(codPed).getNome(),
+                        "0,00");
+                atualizarTabela();
 //                    }
 //               }
             }
@@ -703,10 +703,13 @@ public class JFPrincipal extends javax.swing.JFrame {
 
     private void btmConectarServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmConectarServerActionPerformed
         // TODO add your handling code here:
+        atualizarTabela();
+        helloServer();
+
     }//GEN-LAST:event_btmConectarServerActionPerformed
 
     protected void sairPgm() {
-         int sair;
+        int sair;
         sair = JOptionPane.showConfirmDialog(null,
                 "Confirma Sair do Programa?", "Cliente",
                 JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
@@ -716,7 +719,6 @@ public class JFPrincipal extends javax.swing.JFrame {
             System.exit(0);
         }
     }
-
 
     private String entraCpfCli(boolean isIncluir) {
         // TODO add your handling code here:
@@ -728,7 +730,7 @@ public class JFPrincipal extends javax.swing.JFrame {
         // loop enquanto teclar vazio ou not fim
         while (cpf.isEmpty() || true) {
             // janela de input do CPF
-            cpf = JOptionPane.showInputDialog(this, "CPF");
+            cpf = JOptionPane.showInputDialog(this, "CPF do Cliente");
             if (cpf == null) {
                 return null;
             } else if (cpf.isEmpty()) {
@@ -782,7 +784,7 @@ public class JFPrincipal extends javax.swing.JFrame {
         // loop enquanto teclar vazio ou not fim
         while (cod.isEmpty() || true) {
             // janela de input do CPF
-            cod = JOptionPane.showInputDialog(this, "Cod");
+            cod = JOptionPane.showInputDialog(this, "Cod do Produto");
             if (cod == null) {
                 return null;
             } else if (cod.isEmpty()) {
@@ -836,7 +838,7 @@ public class JFPrincipal extends javax.swing.JFrame {
         // loop enquanto teclar vazio ou not fim
         while (cod.isEmpty() || true) {
             // janela de input do CPF
-            cod = JOptionPane.showInputDialog(this, "Cod");
+            cod = JOptionPane.showInputDialog(this, "Cod do Pedido");
             if (cod == null) {
                 return null;
             } else if (cod.isEmpty()) {
@@ -880,18 +882,18 @@ public class JFPrincipal extends javax.swing.JFrame {
         return cod;
     }
 
-/*    private String getNomeCli(String cpf) {
+    /*    private String getNomeCli(String cpf) {
 
-        ArrayList<Cliente> cpfCod = (obterTodos());
+     ArrayList<Cliente> cpfCod = (obterTodos());
 
-        for (Cliente cpfCod1 : cpfCod) {
-            if (cpf.equals(cpfCod1.getCpf())) {
-                return cpfCod1.getNome();
-            }
-        }
-        return "";
-    }
-*/
+     for (Cliente cpfCod1 : cpfCod) {
+     if (cpf.equals(cpfCod1.getCpf())) {
+     return cpfCod1.getNome();
+     }
+     }
+     return "";
+     }
+     */
     /**
      * @param args the command line arguments
      */
