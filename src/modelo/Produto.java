@@ -13,18 +13,18 @@ import java.io.Serializable;
  * @author Marcos
  */
 public class Produto implements Serializable {
-    private String cpf;
+    private String codProd;
     private String nome;
-    private String quantidade;
-    private String valor;
+    private String qtdProd;
+    private String valorProd;
 
     
     
-    public Produto(String cpf, String nome, String quantidade, String valor) {
-        this.cpf = cpf;
+    public Produto(String cpf, String nome, String qtdProd, String valorProd) {
+        this.codProd = cpf;
         this.nome = nome;
-        this.quantidade = quantidade;
-        this.valor = valor;
+        this.qtdProd = qtdProd;
+        this.valorProd = valorProd;
     }
 
     public Produto() {
@@ -32,59 +32,59 @@ public class Produto implements Serializable {
 
     
     /**
-     * @return the cpf
+     * @return the codProd
      */
-    public String getCod() {
-        return cpf;
+    public String getCodProd() {
+        return codProd;
     }
 
     /**
-     * @param cpf the cpf to set
+     * @param cpf the codProd to set
      */
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public void setCodProd(String cpf) {
+        this.codProd = cpf;
     }
 
     /**
      * @return the nome
      */
-    public String getNome() {
+    public String getNomeProd() {
         return nome;
     }
 
     /**
      * @param nome the nome to set
      */
-    public void setNome(String nome) {
+    public void setNomeProd(String nome) {
         this.nome = nome;
     }
 
     /**
-     * @return the quantidade
+     * @return the qtdProd
      */
-    public String getQuantidade() {
-        return quantidade;
+    public String getQtdProd() {
+        return qtdProd;
     }
 
     /**
-     * @param quantidade the quantidade to set
+     * @param qtdProd the qtdProd to set
      */
-    public void setQuantidade(String quantidade) {
-        this.quantidade = quantidade;
+    public void setQtdProd(String qtdProd) {
+        this.qtdProd = qtdProd;
     }
 
     /**
-     * @return the valor
+     * @return the valorProd
      */
-    public String getValor() {
-        return valor;
+    public String getValorProd() {
+        return valorProd;
     }
 
     /**
-     * @param valor the valor to set
+     * @param valorProd the valorProd to set
      */
-    public void setValor(String valor) {
-        this.valor = valor;
+    public void setValorProd(String valorProd) {
+        this.valorProd = valorProd;
     }
 
 }

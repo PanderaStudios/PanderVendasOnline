@@ -13,12 +13,14 @@ import java.io.Serializable;
  */
 public class ItemPedido implements Serializable {
 
+    private String codPed;
     private String codProd;
     private String nomeProd;
     private String qtdComprada;
     private String valorCompra;
 
-    public ItemPedido(String codProd, String nomeProd, String qtdComprada, String valorCompra) {
+    public ItemPedido(String codPed, String codProd, String nomeProd, String qtdComprada, String valorCompra) {
+        this.codPed = codPed;
         this.codProd = codProd;
         this.nomeProd = nomeProd;
         this.qtdComprada = qtdComprada;
@@ -26,18 +28,26 @@ public class ItemPedido implements Serializable {
     }
 
     public String getCodPed() {
-        return codProd;
+        return codPed;
     }
 
     public void setCodPed(String codPed) {
-        this.codProd = codPed;
+        this.codPed = codPed;
     }
 
     public String getCodProd() {
-        return nomeProd;
+        return codProd;
     }
 
     public void setCodProd(String codProd) {
+        this.codProd = codProd;
+    }
+    
+    public String getNomeProd() {
+        return nomeProd;
+    }
+
+    public void setNomeProd(String codProd) {
         this.nomeProd = codProd;
     }
 

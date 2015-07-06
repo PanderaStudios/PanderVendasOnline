@@ -166,16 +166,16 @@ public class JFPrincipalRemoto extends JFPrincipal {
     }
 
     @Override
-    protected void persistirPedido(Pedido ped, String codPed, String codCli, String nomeCli, String valorCli, DefaultTableModel itensPed) {
-        JDDadosPedidos dadosPed = new JDDadosPedidos(this, true, cPedido, itensPed, obterPedido(codCli));
-        dadosPed.setDados(ped, codPed, codCli, nomeCli, valorCli, itensPed);
+    protected void persistirPedido(Pedido ped, String codPed, String codCli, String nomeCli, String totalPedido, DefaultTableModel itensPed) {
+        JDDadosPedidos dadosPed = new JDDadosPedidos(this, true, cPedido, codPed);
+        dadosPed.setDados(ped, codPed, codCli, nomeCli, totalPedido, itensPed);
         dadosPed.setVisible(true);
         // Modal -> Fica parado aqui até a janela "sumir"
         if (dadosPed.sucesso) {
             try {
                 c1c[2].enviarTexto("P");
                 System.out.println(c1c[2].receberTexto());
-                System.out.println("Cliente - persistir pedidos");
+                System.out.println("* JFPrincipalRemoto * -- cheguei em persistirPedidos Override!!!");
                 c1c[2].enviarObjeto(dadosPed.getDados());
             } catch (IOException ex) {
             } catch (ClassNotFoundException ex) {
@@ -185,9 +185,9 @@ public class JFPrincipalRemoto extends JFPrincipal {
     }
 
     @Override
-    protected void persistirItemPedido(ItemPedido itemped, String codProd, String nomeProd, String qtdCompr, String valorProd) {
+    protected void persistirItemPedido(ItemPedido itemped, String codPed, String codProd, String nomeProd, String qtdCompr, String valorProd) {
         JDDadosItensPed dadosItemPed = new JDDadosItensPed(this, true);
-        dadosItemPed.setDados(itemped, codProd, nomeProd, qtdCompr, valorProd);
+        dadosItemPed.setDados(itemped, codPed, codProd, nomeProd, qtdCompr, valorProd);
         dadosItemPed.setVisible(true);
         // Modal -> Fica parado aqui até a janela "sumir"
         if (dadosItemPed.sucesso) {
@@ -360,11 +360,11 @@ public class JFPrincipalRemoto extends JFPrincipal {
             ipServidor = "127.0.0.1";
         } else {
             ipServidor = Arrays.toString(args);
-            ipServidor = ipServidor.substring(1, ipServidor.length()-1);
+            ipServidor = ipServidor.substring(1, ipServidor.length() - 1);
         }
 
         System.out.println("Ip Selecionado: " + ipServidor);
-       
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             new JFPrincipalRemoto().setVisible(true);

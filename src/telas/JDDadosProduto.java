@@ -18,11 +18,11 @@ public class JDDadosProduto extends javax.swing.JDialog {
 
 //    private ControleProduto pProduto;
 
-        public void setDados(Produto p, String cpf){
-            txtCPF.setText((p==null)?cpf:p.getCod());
-            txtNomeProduto.setText((p==null)?"":p.getNome());
-            txtQtdProduto.setText((String) ((p==null)?"":p.getQuantidade()));
-            txtValorProduto.setText((String) ((p==null)?"":p.getValor()));
+        public void setDados(Produto produto, String codProd){
+            txtCPF.setText((produto==null)?codProd:produto.getCodProd());
+            txtNomeProduto.setText((produto==null)?"":produto.getNomeProd());
+            txtQtdProduto.setText((String) ((produto==null)?"":produto.getQtdProd()));
+            txtValorProduto.setText((String) ((produto==null)?"":produto.getValorProd()));
             txtCPF.setEditable(false);
             txtCPF.setEditable(false);
             txtCPF.setEnabled(false);

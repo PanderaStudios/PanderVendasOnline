@@ -21,16 +21,18 @@ import modelo.Pedido;
  */
 public class JDDadosPedidos extends javax.swing.JDialog {
 
- //   private DefaultTableModel listaProdPed;
     public boolean sucesso = false;
 
     protected ControlePedido cPedido;
+    
+    private String codPed;
+
 //    private Pedido pedido;
 //    private ItemPedido itemPedido;
 
     public void setDados(Pedido ped, String codPed, String codCli, String nomeCli, String valorPed, DefaultTableModel listaProdPed) {
         {
-            txtCOD.setText(
+            txtCodPed.setText(
                     (ped == null) ? codPed : ped.getCodPed());
             txtCodCliente.setText(
                     (ped == null) ? codCli : ped.getCodCli());
@@ -39,10 +41,9 @@ public class JDDadosPedidos extends javax.swing.JDialog {
             txtTotalPed.setText(
                     (ped == null) ? valorPed : ped.getTotalPed());
 
- //           this.listaProdPed = listaProdPed;
-
-            txtCOD.setEditable(false);
-            txtCOD.setEnabled(false);
+            //           this.listaProdPed = listaProdPed;
+            txtCodPed.setEditable(false);
+            txtCodPed.setEnabled(false);
             txtCodCliente.setEditable(false);
             txtCodCliente.setEnabled(false);
             txtNomeCliente.setEditable(false);
@@ -52,23 +53,11 @@ public class JDDadosPedidos extends javax.swing.JDialog {
 
     public Pedido getDados() {
         return new Pedido(
-                txtCOD.getText(),
+                txtCodPed.getText(),
                 txtCodCliente.getText(),
                 txtNomeCliente.getText(),
-                txtTotalPed.getText(),
-                jTablePedido.getModel().toString()
+                txtTotalPed.getText()
         );
-    }
-
-    protected void persistirItensPedido(ItemPedido itemPed, String codPed, String codCli, String nomeCli, String valorPed, Pedido pedido) {
-        JDDadosItensPed dados = new JDDadosItensPed(null, true);
-        dados.setDados(itemPed, codPed, codCli, nomeCli, valorPed);
-        dados.setVisible(true);
-        // Modal -> Fica parado aqui até a janela "sumir"
-        if (dados.sucesso) {
-            cPedido.persistirItens(dados.getDados());
-        }
-        
     }
 
     /**
@@ -77,14 +66,12 @@ public class JDDadosPedidos extends javax.swing.JDialog {
      * @param parent
      * @param modal
      * @param cPedido
-     * @param listaProdPed
+     * @param codPed
      */
-    public JDDadosPedidos(Frame parent, boolean modal, ControlePedido cPedido, DefaultTableModel listaProdPed, Pedido pedido) {
+    public JDDadosPedidos(Frame parent, boolean modal, ControlePedido cPedido, String codPed) {
         super(parent, modal);
         this.cPedido = cPedido;
- //       this.listaProdPed = listaProdPed;
-//        this.pedido = pedido;
-//        itemPedido = new ItemPedido(pedido.getCodPed(), pedido.getNomeCli(), pedido.getCodCli(), pedido.getTotalPed());
+        this.codPed = codPed;
         initComponents();
     }
 
@@ -96,23 +83,25 @@ public class JDDadosPedidos extends javax.swing.JDialog {
         String[] titulos
                 = {"CodProd", "NomeProd", "QtdCompr", "ValorPed"};
 //        try {
-            ArrayList<ItemPedido> lista = cPedido.obterTodosItens();
-            Object[][] valores = new Object[lista.size()][4];
-            for (int i = 0; i < lista.size(); i++) {
-                valores[i][0] = lista.get(i).getCodProd();
-                valores[i][1] = lista.get(i).getCodPed(); // trocar por nome protudo
-                valores[i][2] = lista.get(i).getQtdComprada();
-                valores[i][3] = lista.get(i).getValorCompra();
-            }
-            return new DefaultTableModel(valores, titulos);
-//        } catch (NullPointerException ex) {
-//            Object[][] valores2 = new Object[1][4];
-//            valores2[0][0] = "----"; //lista.get(i).getCodProd();
-//            valores2[0][1] = "----"; //lista.get(i).getCodPed(); // trocar por nome protudo
-//            valores2[0][2] = "----"; //lista.get(i).getQtdComprada();
-//            valores2[0][3] = "----"; //lista.get(i).getValorCompra();
-//            return new DefaultTableModel(valores2, titulos);
-//        }
+        ArrayList<ItemPedido> lista = cPedido.obterTodosItens();
+        Object[][] valores = new Object[lista.size()][4];
+        for (int i = 0; i < lista.size(); i++) {
+            valores[i][0] = lista.get(i).getCodProd();
+            valores[i][1] = lista.get(i).getNomeProd(); // trocar por nome protudo
+            valores[i][2] = lista.get(i).getQtdComprada();
+            valores[i][3] = lista.get(i).getValorCompra();
+        }
+        return new DefaultTableModel(valores, titulos);
+    }
+
+    protected void persistirItemPedido(ItemPedido itemped, String codPed, String codProd, String nomeProd, String qtdCompr, String valorPed) {
+        JDDadosItensPed dados = new JDDadosItensPed(null, true);
+        dados.setDados(itemped, codPed, codProd, nomeProd, qtdCompr, valorPed);
+        dados.setVisible(true);
+        // Modal -> Fica parado aqui até a janela "sumir"
+        if (dados.sucesso) {
+            cPedido.persistirItens(dados.getDados());
+        }
     }
 
     /**
@@ -129,7 +118,7 @@ public class JDDadosPedidos extends javax.swing.JDialog {
         txtNomeCliente = new javax.swing.JTextField();
         btmConfirmar = new javax.swing.JButton();
         btmCancelar = new javax.swing.JButton();
-        txtCOD = new javax.swing.JTextField();
+        txtCodPed = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTablePedido = new javax.swing.JTable();
@@ -170,7 +159,7 @@ public class JDDadosPedidos extends javax.swing.JDialog {
             }
         });
 
-        txtCOD.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtCodPed.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         jLabel5.setText("Entrada de Dados do Pedido");
 
@@ -266,7 +255,7 @@ public class JDDadosPedidos extends javax.swing.JDialog {
                                         .addComponent(jLabel2)
                                         .addGap(18, 18, 18)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtCOD, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+                                    .addComponent(txtCodPed, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
                                     .addComponent(txtCodCliente))
                                 .addGap(26, 26, 26)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -299,7 +288,7 @@ public class JDDadosPedidos extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtCOD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCodPed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addGap(3, 3, 3)
@@ -340,14 +329,15 @@ public class JDDadosPedidos extends javax.swing.JDialog {
 
     private void btmIncluirItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmIncluirItemActionPerformed
         // TODO add your handling code here:
-        String cod = "";
+        String codProd = "";
 //entraCodProd(true); // recebera codigo digitado
-// janela de input do CPF
-        cod = JOptionPane.showInputDialog(this, "Cod");
-        if (cod != null) {
-            if (!cod.isEmpty()) {
+// janela de input do CodProd
+        codProd = JOptionPane.showInputDialog(this, "Codigo Produto");
+        if (codProd != null) {
+            if (!codProd.isEmpty()) {
                 // Modal -> Fica parado aqui até a janela "sumir"
-                cPedido.persistirItens(new ItemPedido(cod,"","",""));
+                System.out.println("* JFPrincipalRemoto * -- cheguei em BtmIncluirItem!!!");
+                persistirItemPedido(null, codPed, codProd, "", "", "");
                 atualizarTabela();
             }
         }
@@ -396,7 +386,7 @@ public class JDDadosPedidos extends javax.swing.JDialog {
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(() -> {
-            JDDadosPedidos dialog = new JDDadosPedidos(new JFrame(), true, null, null, null);
+            JDDadosPedidos dialog = new JDDadosPedidos(new JFrame(), true, null, null);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
@@ -428,8 +418,8 @@ public class JDDadosPedidos extends javax.swing.JDialog {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTablePedido;
-    private javax.swing.JTextField txtCOD;
     private javax.swing.JTextField txtCodCliente;
+    private javax.swing.JTextField txtCodPed;
     private javax.swing.JTextField txtNomeCliente;
     private javax.swing.JTextField txtTotalPed;
     // End of variables declaration//GEN-END:variables

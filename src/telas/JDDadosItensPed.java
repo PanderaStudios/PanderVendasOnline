@@ -19,9 +19,10 @@ public class JDDadosItensPed extends javax.swing.JDialog {
 
 //    private ControleProduto pProduto;
 
-        public void setDados(ItemPedido itemP, String codProd, String nomeProd, String qtdProd, String valorPed){
+        public void setDados(ItemPedido itemP, String codPed, String codProd, String nomeProd, String qtdProd, String valorPed){
+            txtCodPed.setText((itemP==null)?codPed : itemP.getCodPed());
             txtCodProd.setText((itemP==null)?codProd : itemP.getCodProd());
-            txtNomeProduto.setText((itemP==null) ? nomeProd : itemP.getCodPed()); // trocar por nomeProduto
+            txtNomeProduto.setText((itemP==null) ? nomeProd : itemP.getNomeProd()); // trocar por nomeProduto
             txtQtdProduto.setText((String) ((itemP==null) ? qtdProd : itemP.getQtdComprada()));
             txtValorTotalProd.setText((String) ((itemP==null) ? valorPed : itemP.getValorCompra()));
             txtCodProd.setEditable(false);
@@ -31,6 +32,7 @@ public class JDDadosItensPed extends javax.swing.JDialog {
 
       public ItemPedido getDados(){
         return new ItemPedido(
+            txtCodPed.getText(),
             txtCodProd.getText(),
             txtNomeProduto.getText(),
             txtQtdProduto.getText(),
@@ -66,10 +68,12 @@ public class JDDadosItensPed extends javax.swing.JDialog {
         txtQtdProduto = new javax.swing.JTextField();
         txtValorTotalProd = new javax.swing.JTextField();
         btmConfirmar = new javax.swing.JButton();
-        lblCPFProduto = new javax.swing.JLabel();
+        lblCodProduto = new javax.swing.JLabel();
         btmCancelar = new javax.swing.JButton();
         txtCodProd = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        txtCodPed = new javax.swing.JTextField();
+        lblCodPed = new javax.swing.JLabel();
 
         setTitle("Pandera Studios (Cliente)");
 
@@ -86,7 +90,7 @@ public class JDDadosItensPed extends javax.swing.JDialog {
             }
         });
 
-        lblCPFProduto.setText("CodProd");
+        lblCodProduto.setText("CodProd");
 
         btmCancelar.setText("Cancelar");
         btmCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -100,6 +104,17 @@ public class JDDadosItensPed extends javax.swing.JDialog {
         txtCodProd.setEnabled(false);
 
         jLabel5.setText("Entrada de Dados Itens do Pedido");
+
+        txtCodPed.setEditable(false);
+        txtCodPed.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtCodPed.setEnabled(false);
+        txtCodPed.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodPedActionPerformed(evt);
+            }
+        });
+
+        lblCodPed.setText("CodPed");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -115,8 +130,8 @@ public class JDDadosItensPed extends javax.swing.JDialog {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblQtdProduto)
                                     .addComponent(lblNomeProduto)
-                                    .addComponent(lblCPFProduto))
-                                .addGap(18, 18, 18)
+                                    .addComponent(lblCodProduto))
+                                .addGap(77, 77, 77)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(btmConfirmar)
@@ -128,7 +143,12 @@ public class JDDadosItensPed extends javax.swing.JDialog {
                                     .addComponent(txtCodProd, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(lblCodPed)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtCodPed, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -136,9 +156,13 @@ public class JDDadosItensPed extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCPFProduto)
+                    .addComponent(lblCodPed)
+                    .addComponent(txtCodPed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCodProduto)
                     .addComponent(txtCodProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -171,6 +195,10 @@ public class JDDadosItensPed extends javax.swing.JDialog {
         sucesso = false;
         setVisible(false);
     }//GEN-LAST:event_btmCancelarActionPerformed
+
+    private void txtCodPedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodPedActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodPedActionPerformed
 
     /**
      * @param args the command line arguments
@@ -219,10 +247,12 @@ public class JDDadosItensPed extends javax.swing.JDialog {
     private javax.swing.JButton btmCancelar;
     private javax.swing.JButton btmConfirmar;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel lblCPFProduto;
+    private javax.swing.JLabel lblCodPed;
+    private javax.swing.JLabel lblCodProduto;
     private javax.swing.JLabel lblNomeProduto;
     private javax.swing.JLabel lblQtdProduto;
     private javax.swing.JLabel lblValorProduto;
+    private javax.swing.JTextField txtCodPed;
     private javax.swing.JTextField txtCodProd;
     private javax.swing.JTextField txtNomeProduto;
     private javax.swing.JTextField txtQtdProduto;

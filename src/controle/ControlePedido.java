@@ -127,10 +127,12 @@ public class ControlePedido {
     }
 
     public void persistir(Pedido pedido) {
+        System.out.println("* Controle Pedido * -- cheguei em persistirPedidos!!!");
         bancoPedidos.put(pedido.getCodPed(), pedido);
     }
 
     public void persistirItens(ItemPedido itemPedido) {
+        System.out.println("* Controle Pedido * -- cheguei em persistirItens!!!");
         bancoItensPedido.put(itemPedido.getCodPed(), itemPedido);
     }
 
@@ -152,6 +154,7 @@ public class ControlePedido {
 
     public ItemPedido obterItem(String cod) {
         if (bancoItensPedido.containsKey(cod)) {
+        System.out.println("* Controle Pedido * -- cheguei em obterItem!!!");
             return bancoItensPedido.get(cod);
         } else {
             return null;
@@ -175,7 +178,8 @@ public class ControlePedido {
                 -> (t1.getCodPed()== null)
                         ? (t2.getCodPed() == null) ? 0 : -1
                         : t1.getCodPed().compareTo(t2.getCodPed()));
-        return lista;
+        System.out.println("* Controle Pedido * -- cheguei em obterTodosItens!!!");
+        return lista;           
    }
 
 }

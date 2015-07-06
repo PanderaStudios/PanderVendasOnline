@@ -90,7 +90,7 @@ public class ControleProduto {
     }
 
     public void persistir(Produto produto) {
-        bancoProdutos.put(produto.getCod(), produto);
+        bancoProdutos.put(produto.getCodProd(), produto);
     }
 
     public void remover(String cpf) {
@@ -110,9 +110,9 @@ public class ControleProduto {
         lista.addAll(bancoProdutos.values());
         Collections.sort(lista, new Comparator<Produto>() {
             public int compare(Produto t1, Produto t2) {
-                return (t1.getNome() == null)
-                        ? (t2.getNome() == null) ? 0 : -1
-                        : t1.getNome().compareTo(t2.getNome());
+                return (t1.getNomeProd() == null)
+                        ? (t2.getNomeProd() == null) ? 0 : -1
+                        : t1.getNomeProd().compareTo(t2.getNomeProd());
             }
         });
         return lista;
