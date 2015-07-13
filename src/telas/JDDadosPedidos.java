@@ -26,6 +26,7 @@ public class JDDadosPedidos extends javax.swing.JDialog {
     protected ControlePedido cPedido;
     
     private String codPed;
+    public boolean itemSucesso = false;
 
 //    private Pedido pedido;
 //    private ItemPedido itemPedido;
@@ -98,10 +99,13 @@ public class JDDadosPedidos extends javax.swing.JDialog {
         JDDadosItensPed dados = new JDDadosItensPed(null, true);
         dados.setDados(itemped, codPed, codProd, nomeProd, qtdCompr, valorPed);
         dados.setVisible(true);
+                System.out.println("* JDDadosPedidos * -- cheguei em BtmIncluirItem!!!");
         // Modal -> Fica parado aqui até a janela "sumir"
         if (dados.sucesso) {
-            cPedido.persistirItens(dados.getDados());
+ //           cPedido.persistirItens(dados.getDados());
+            itemSucesso = true;
         }
+    
     }
 
     /**
@@ -336,7 +340,7 @@ public class JDDadosPedidos extends javax.swing.JDialog {
         if (codProd != null) {
             if (!codProd.isEmpty()) {
                 // Modal -> Fica parado aqui até a janela "sumir"
-                System.out.println("* JFPrincipalRemoto * -- cheguei em BtmIncluirItem!!!");
+                System.out.println("* JDDadosPedidos * -- cheguei em BtmIncluirItem!!!");
                 persistirItemPedido(null, codPed, codProd, "", "", "");
                 atualizarTabela();
             }

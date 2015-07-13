@@ -32,7 +32,7 @@ public class ControlePedido {
     private final static String PEDIDOS = "Pedidos";
     private final static String pasta = ":\\TrabalhoJava\\";
     private final static String arquivo = ".bin";
-    private static String drive = "d";
+    private static String drive = "c";
 
     private final static String ITENSPEDIDO = "ItensPedido";
  

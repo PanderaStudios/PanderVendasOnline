@@ -170,18 +170,24 @@ public class JFPrincipalRemoto extends JFPrincipal {
         JDDadosPedidos dadosPed = new JDDadosPedidos(this, true, cPedido, codPed);
         dadosPed.setDados(ped, codPed, codCli, nomeCli, totalPedido, itensPed);
         dadosPed.setVisible(true);
+                System.out.println("* JFPrincipalRemoto * -- cheguei em persistirPedidos Override!!!");
         // Modal -> Fica parado aqui até a janela "sumir"
         if (dadosPed.sucesso) {
+
             try {
                 c1c[2].enviarTexto("P");
                 System.out.println(c1c[2].receberTexto());
-                System.out.println("* JFPrincipalRemoto * -- cheguei em persistirPedidos Override!!!");
+                System.out.println("* JFPrincipalRemoto * -- cheguei em persistirPedidos Coneta Server ");
                 c1c[2].enviarObjeto(dadosPed.getDados());
             } catch (IOException ex) {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(JFPrincipalRemoto.class.getName()).log(Level.SEVERE, null, ex);
             }
+
+            persistirItemPedido(null, codPed, "", "", "", "");
+            
         }
+        
     }
 
     @Override
@@ -189,6 +195,7 @@ public class JFPrincipalRemoto extends JFPrincipal {
         JDDadosItensPed dadosItemPed = new JDDadosItensPed(this, true);
         dadosItemPed.setDados(itemped, codPed, codProd, nomeProd, qtdCompr, valorProd);
         dadosItemPed.setVisible(true);
+                System.out.println("* JFPrincipalRemoto * -- cheguei em persistirItemPedido Override!!!");
         // Modal -> Fica parado aqui até a janela "sumir"
         if (dadosItemPed.sucesso) {
             try {
@@ -196,6 +203,7 @@ public class JFPrincipalRemoto extends JFPrincipal {
                 System.out.println(c1c[2].receberTexto());
                 System.out.println("Cliente - persistir itens pedidos");
                 c1c[2].enviarObjeto(dadosItemPed.getDados());
+                System.out.println("* JFPrincipalRemoto * -- cheguei em persistirItemPedido enviei objeto");
             } catch (IOException ex) {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(JFPrincipalRemoto.class.getName()).log(Level.SEVERE, null, ex);
