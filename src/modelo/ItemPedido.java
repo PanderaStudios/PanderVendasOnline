@@ -28,7 +28,7 @@ public class ItemPedido implements Serializable {
         this.qtdComprada = qtdComprada;
         this.valorCompra = valorCompra;
         item ++;
-        codItem += "" + item; 
+        codItem = "" + item; 
     }
 
     public String getCodPed() {

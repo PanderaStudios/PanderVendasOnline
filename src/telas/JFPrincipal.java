@@ -143,7 +143,7 @@ public class JFPrincipal extends javax.swing.JFrame {
     }
 
     protected void persistirPedido(Pedido pedido, String codPed, String codCli, String nomeCli, String valorPed, DefaultTableModel itensPed) {
-        JDDadosPedidos dados = new JDDadosPedidos(this, true, cPedido, codPed);
+        JDDadosPedidos dados = new JDDadosPedidos(this, true, cPedido, codPed, null);
         dados.setDados(pedido, codPed, codCli, nomeCli, valorPed, itensPed);
         dados.setVisible(true);
         // Modal -> Fica parado aqui até a janela "sumir"

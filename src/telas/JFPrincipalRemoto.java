@@ -167,7 +167,8 @@ public class JFPrincipalRemoto extends JFPrincipal {
 
     @Override
     protected void persistirPedido(Pedido ped, String codPed, String codCli, String nomeCli, String totalPedido, DefaultTableModel itensPed) {
-        JDDadosPedidos dadosPed = new JDDadosPedidos(this, true, cPedido, codPed);
+            ItemPedido itemPedido = new ItemPedido(codPed, "", "", "", "");
+        JDDadosPedidos dadosPed = new JDDadosPedidos(this, true, cPedido, codPed, itemPedido);
         dadosPed.setDados(ped, codPed, codCli, nomeCli, totalPedido, itensPed);
         dadosPed.setVisible(true);
                 System.out.println("* JFPrincipalRemoto * -- cheguei em persistirPedidos Override!!!");
@@ -183,9 +184,8 @@ public class JFPrincipalRemoto extends JFPrincipal {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(JFPrincipalRemoto.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-            persistirItemPedido(null, codPed, "", "", "", "");
-            
+            persistirItemPedido(itemPedido, itemPedido.getCodPed(), itemPedido.getCodProd(),
+                    itemPedido.getNomeProd(), itemPedido.getQtdComprada(), itemPedido.getValorCompra());
         }
         
     }
