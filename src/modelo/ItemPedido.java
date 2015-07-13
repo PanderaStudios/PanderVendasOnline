@@ -13,6 +13,8 @@ import java.io.Serializable;
  */
 public class ItemPedido implements Serializable {
 
+    private static int item = 0;
+    private String codItem;
     private String codPed;
     private String codProd;
     private String nomeProd;
@@ -25,6 +27,8 @@ public class ItemPedido implements Serializable {
         this.nomeProd = nomeProd;
         this.qtdComprada = qtdComprada;
         this.valorCompra = valorCompra;
+        item ++;
+        codItem += "" + item; 
     }
 
     public String getCodPed() {
@@ -65,6 +69,14 @@ public class ItemPedido implements Serializable {
 
     public void setValorCompra(String valorCompra) {
         this.valorCompra = valorCompra;
+    }
+
+    public String getCodItem() {
+        return codItem;
+    }
+
+    public void setCodItem(String codItem) {
+        this.codItem = codItem;
     }
 
 }
