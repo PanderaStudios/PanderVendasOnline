@@ -168,6 +168,7 @@ public class ControlePedido {
                 -> (t1.getCodCli() == null)
                         ? (t2.getCodCli() == null) ? 0 : -1
                         : t1.getCodCli().compareTo(t2.getCodCli()));
+        System.out.println("* Controle Pedido * -- cheguei em obterTodosPedidos!!!");
         return lista;
     }
 

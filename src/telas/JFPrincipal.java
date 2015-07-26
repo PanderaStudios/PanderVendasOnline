@@ -142,9 +142,9 @@ public class JFPrincipal extends javax.swing.JFrame {
         }
     }
 
-    protected void persistirPedido(Pedido pedido, String codPed, String codCli, String nomeCli, String valorPed, DefaultTableModel itensPed) {
-        JDDadosPedidos dados = new JDDadosPedidos(this, true, cPedido, codPed, null);
-        dados.setDados(pedido, codPed, codCli, nomeCli, valorPed, itensPed);
+    protected void persistirPedido(Pedido pedido, String codPed, String codCli, String nomeCli, String valorPed) {
+        JDDadosPedidos dados = new JDDadosPedidos(this, true, cPedido, codPed);
+        dados.setDados(pedido, codPed, codCli, nomeCli, valorPed);
         dados.setVisible(true);
         // Modal -> Fica parado aqui até a janela "sumir"
         if (dados.sucesso) {
@@ -650,7 +650,7 @@ public class JFPrincipal extends javax.swing.JFrame {
                     if (!cpf.isEmpty()) {
                         // Modal -> Fica parado aqui até a janela "sumir"
                         System.out.println("* JFPrincipal * -- cheguei em IncluiPedidos!!!");
-                        persistirPedido(null, codPed, cpf, obter(cpf).getNome(), "0,00", (DefaultTableModel) getDadosTabelaItens());
+                        persistirPedido(null, codPed, cpf, obter(cpf).getNome(), "0,00");
                         atualizarTabela();
                     }
                 }
@@ -664,7 +664,7 @@ public class JFPrincipal extends javax.swing.JFrame {
         String cod = entraCodPed(false); // recebera codigo digitado
         if (cod != null) {
             if (!cod.isEmpty()) {
-                persistirPedido(obterPedido(cod), cod, "", "", "", null);
+                persistirPedido(obterPedido(cod), cod, "", "", "");
                 atualizarTabela();
             }
         }

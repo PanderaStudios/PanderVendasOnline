@@ -166,12 +166,12 @@ public class JFPrincipalRemoto extends JFPrincipal {
     }
 
     @Override
-    protected void persistirPedido(Pedido ped, String codPed, String codCli, String nomeCli, String totalPedido, DefaultTableModel itensPed) {
-            ItemPedido itemPedido = new ItemPedido(codPed, "", "", "", "");
-        JDDadosPedidos dadosPed = new JDDadosPedidos(this, true, cPedido, codPed, itemPedido);
-        dadosPed.setDados(ped, codPed, codCli, nomeCli, totalPedido, itensPed);
+    protected void persistirPedido(Pedido ped, String codPed, String codCli, String nomeCli, String totalPedido) {
+        ItemPedido itemPedido = new ItemPedido(codPed, "", "", "", "");
+        JDDadosPedidos dadosPed = new JDDadosPedidos(this, true, cPedido, codPed);
+        dadosPed.setDados(ped, codPed, codCli, nomeCli, totalPedido);
         dadosPed.setVisible(true);
-                System.out.println("* JFPrincipalRemoto * -- cheguei em persistirPedidos Override!!!");
+        System.out.println("* JFPrincipalRemoto * -- cheguei em persistirPedidos Override!!!");
         // Modal -> Fica parado aqui até a janela "sumir"
         if (dadosPed.sucesso) {
 
@@ -187,17 +187,18 @@ public class JFPrincipalRemoto extends JFPrincipal {
             persistirItemPedido(itemPedido, itemPedido.getCodPed(), itemPedido.getCodProd(),
                     itemPedido.getNomeProd(), itemPedido.getQtdComprada(), itemPedido.getValorCompra());
         }
-        
+
     }
 
     @Override
     protected void persistirItemPedido(ItemPedido itemped, String codPed, String codProd, String nomeProd, String qtdCompr, String valorProd) {
         JDDadosItensPed dadosItemPed = new JDDadosItensPed(this, true);
         dadosItemPed.setDados(itemped, codPed, codProd, nomeProd, qtdCompr, valorProd);
-        dadosItemPed.setVisible(true);
-                System.out.println("* JFPrincipalRemoto * -- cheguei em persistirItemPedido Override!!!");
+//        dadosItemPed.setVisible(true);
+        System.out.println("* JFPrincipalRemoto * -- cheguei em persistirItemPedido Override!!!");
         // Modal -> Fica parado aqui até a janela "sumir"
-        if (dadosItemPed.sucesso) {
+//        if (dadosItemPed.sucesso) 
+        {
             try {
                 c1c[2].enviarTexto("iP");
                 System.out.println(c1c[2].receberTexto());

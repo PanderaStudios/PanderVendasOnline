@@ -24,23 +24,21 @@ public class JDDadosPedidos extends javax.swing.JDialog {
     public boolean sucesso = false;
 
     protected ControlePedido cPedido;
-    
+
     private String codPed;
     public boolean itemSucesso = false;
 
 //    private Pedido pedido;
-    private ItemPedido itemPedido;
-
-    public void setDados(Pedido ped, String codPed, String codCli, String nomeCli, String valorPed, DefaultTableModel listaProdPed) {
+    public void setDados(Pedido ped, String codPed, String codCli, String nomeCli, String valorPed) {
         {
             txtCodPed.setText(
                     (ped == null) ? codPed : ped.getCodPed());
             txtCodCliente.setText(
-                    (ped == null) ? codCli : ped.getCodCli());
+                    (codCli == null) ? codCli : ped.getCodCli());
             txtNomeCliente.setText(
-                    (ped == null) ? nomeCli : ped.getNomeCli());
+                    (nomeCli == null) ? nomeCli : ped.getNomeCli());
             txtTotalPed.setText(
-                    (ped == null) ? valorPed : ped.getTotalPed());
+                    (valorPed == null) ? valorPed : ped.getTotalPed());
 
             //           this.listaProdPed = listaProdPed;
             txtCodPed.setEditable(false);
@@ -69,11 +67,10 @@ public class JDDadosPedidos extends javax.swing.JDialog {
      * @param cPedido
      * @param codPed
      */
-    public JDDadosPedidos(Frame parent, boolean modal, ControlePedido cPedido, String codPed, ItemPedido itemPedido) {
+    public JDDadosPedidos(Frame parent, boolean modal, ControlePedido cPedido, String codPed) {
         super(parent, modal);
         this.cPedido = cPedido;
         this.codPed = codPed;
-        this.itemPedido = itemPedido;
         initComponents();
     }
 
@@ -100,14 +97,13 @@ public class JDDadosPedidos extends javax.swing.JDialog {
         JDDadosItensPed dados = new JDDadosItensPed(null, true);
         dados.setDados(itemped, codPed, codProd, nomeProd, qtdCompr, valorPed);
         dados.setVisible(true);
-                System.out.println("* JDDadosPedidos * -- cheguei em BtmIncluirItem!!!");
+        System.out.println("* JDDadosPedidos * -- cheguei em persistirItemPedido!!!");
         // Modal -> Fica parado aqui até a janela "sumir"
         if (dados.sucesso) {
- //           cPedido.persistirItens(dados.getDados());
-            itemPedido = itemped;
+            //           cPedido.persistirItens(dados.getDados());
             itemSucesso = true;
         }
-    
+
     }
 
     /**
@@ -335,14 +331,12 @@ public class JDDadosPedidos extends javax.swing.JDialog {
 
     private void btmIncluirItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmIncluirItemActionPerformed
         // TODO add your handling code here:
-        String codProd = "";
-//entraCodProd(true); // recebera codigo digitado
-// janela de input do CodProd
-        codProd = JOptionPane.showInputDialog(this, "Codigo Produto");
+        // janela de input do CodProd
+        String codProd = JOptionPane.showInputDialog(this, "Codigo Produto");
         if (codProd != null) {
             if (!codProd.isEmpty()) {
                 // Modal -> Fica parado aqui até a janela "sumir"
-                System.out.println("* JDDadosPedidos * -- cheguei em BtmIncluirItem!!!");
+                System.out.println("* JDDadosPedidos * -- cheguei em BtmIncluirItem!!!***");
                 persistirItemPedido(null, codPed, codProd, "", "", "");
                 atualizarTabela();
             }
@@ -392,7 +386,7 @@ public class JDDadosPedidos extends javax.swing.JDialog {
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(() -> {
-            JDDadosPedidos dialog = new JDDadosPedidos(new JFrame(), true, null, null, null);
+            JDDadosPedidos dialog = new JDDadosPedidos(new JFrame(), true, null, null);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
@@ -430,11 +424,4 @@ public class JDDadosPedidos extends javax.swing.JDialog {
     private javax.swing.JTextField txtTotalPed;
     // End of variables declaration//GEN-END:variables
 
-    public ItemPedido getItemPedido() {
-        return itemPedido;
-    }
-
-    public void setItemPedido(ItemPedido itemPedido) {
-        this.itemPedido = itemPedido;
-    }
 }
